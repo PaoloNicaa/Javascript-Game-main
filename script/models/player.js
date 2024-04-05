@@ -36,11 +36,12 @@ class Player extends Hitbox {
         this.update_timer = new Clock(125);
         this.canJump = true;
         this.bullets = [];
+        this.health = 100;
     }
 
     jump() {
         if(this.canJump) {
-            this.velocity.y = 32;
+            this.velocity.y = 20;
             //this.velocity.x = 10;
         }
         //  TODO: Fix double jump based on whatever ground collision
@@ -69,6 +70,19 @@ class Player extends Hitbox {
 
         super.draw(ctx);
         
+    }
+
+    drawHealthBar(ctx) {
+        const barWidth = 100;
+        const barHeight = 10;
+        const x = this.position.x;
+        const y = ctx.canvas.clientHeight - this.position.y - barHeight - 40;
+        ctx.fillStyle = 'green';
+        ctx.fillRect(x, y, barWidth * (this.health / 100), barHeight);
+    }
+
+    setX(x){
+        this.position.x = x;
     }
 
     update() {

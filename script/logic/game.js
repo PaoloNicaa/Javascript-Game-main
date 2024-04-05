@@ -20,6 +20,9 @@ class Game {
         this.canvas.style.backgroundImage = "url('" + this.config.BACKGROUND_IMG_SRC + "')";
         this.canvas.style.backgroundSize = "contain";
 
+        this.newPlayer = new Player(this.config.PLAYER_SRC, "Palnia");
+        this.newPlayer.setX(400);
+
         this.ground = new Hitbox(0,40, this.canvas.width, 150);
         this.player = new Player(this.config.PLAYER_SRC, this.playerNickname);
         this.fireball = new Sprite(this.config.FIREBALL_SRC, 360, 360, 6, 1, 50, 50);
@@ -84,6 +87,16 @@ class Game {
         };
         this.player.update();
         this.fireball.update();
+
+        for (let i = this.player.bullets.length - 1; i >= 0; i--) {
+            let fireball = this.player.bullets[i];
+            fireball.update();
+
+            if (fireball.collidesWith(this.otherPlayer)) {
+                this.player.bullets.splice(i, 1);
+                this.newPlayer.health -= 10;
+            }
+        }
     }
 
     playBgMusic() {
@@ -96,7 +109,13 @@ class Game {
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+
+        this.newPlayer.draw(this.ctx);
+        this.newPlayer.drawHealthBar(this.ctx);
+
         this.player.draw(this.ctx);
+        this.player.drawHealthBar(this.ctx);
+        
         this.fireball.draw(this.ctx);
         this.ground.draw(this.ctx);
         this.obstacle.draw(this.ctx);

@@ -11,7 +11,7 @@ class Game {
         this.canvas = canvas;
         this.playerNickname = playerNickname;
         this.ctx = canvas.getContext('2d');
-    }
+    } 
 
     init() {
         this.canvas.style.position = 'absolute';

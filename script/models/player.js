@@ -81,9 +81,7 @@ class Player extends Hitbox {
         ctx.fillRect(x, y, barWidth * (this.health / 100), barHeight);
     }
 
-    setX(x){
-        this.position.x = x;
-    }
+
 
     update() {
         this.position.add(this.velocity);

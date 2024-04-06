@@ -37,6 +37,14 @@ class Hitbox {
         ctx.strokeRect(this.position.x, ctx.canvas.clientHeight - this.position.y, this.width, this.height);
     }
 
+    setX(x){
+        this.position.x = x;
+    }
+
+    setY(y){
+        this.position.y = y;
+    }
+
 
 
 }

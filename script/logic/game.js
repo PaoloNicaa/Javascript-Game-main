@@ -6,10 +6,11 @@ import Hitbox from "../models/hitbox.js";
 class Game {
     playerNickname;
 
-    constructor(canvas, config, playerNickname) {
+    constructor(canvas, config, playerNickname, playerNickname2) {
         this.config = config
         this.canvas = canvas;
         this.playerNickname = playerNickname;
+        this.playerNickname2 = playerNickname2;
         this.ctx = canvas.getContext('2d');
     } 
 
@@ -20,9 +21,9 @@ class Game {
         this.canvas.style.backgroundImage = "url('" + this.config.BACKGROUND_IMG_SRC + "')";
         this.canvas.style.backgroundSize = "contain";
 
-        this.newPlayer = new Player(this.config.PLAYER_SRC, "Gigi");
+        this.newPlayer = new Player(this.config.PLAYER_SRC, this.playerNickname2);
         this.newPlayer.setY(215);
-        this.newPlayer.setX(500);
+        this.newPlayer.setX(50);
 
         this.ground = new Hitbox(0,40, this.canvas.width, 150);
         this.player = new Player(this.config.PLAYER_SRC, this.playerNickname);

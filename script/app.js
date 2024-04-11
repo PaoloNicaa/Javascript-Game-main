@@ -3,9 +3,10 @@ import conf from './config.js';
 
 let canvas = document.getElementById('board');
 
-let playerNick = window.prompt("Inserisci NOME: ");
+let playerNick = window.prompt("Inserisci NOME giocatore 1: ");
+let playerNick2 = window.prompt("Inserisci NOME giocatore 2: ");
 
-let g = new Game(canvas, conf, playerNick);
+let g = new Game(canvas, conf, playerNick2, playerNick);
 
 g.init();
 

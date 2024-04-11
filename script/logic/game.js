@@ -23,8 +23,8 @@ class Game {
 
         this.newPlayer = new Player(this.config.PLAYER_SRC, this.playerNickname2);
         
-
-        this.ground = new Hitbox(0,40, this.canvas.width, 150);
+        this.box = new Hitbox(500, 90, 150, 50);
+        this.ground = new Hitbox(0, 40, this.canvas.width, 150);
         this.player = new Player(this.config.PLAYER_SRC, this.playerNickname);
         this.fireball = new Sprite(this.config.FIREBALL_SRC, 360, 360, 6, 1, 50, 50);
         this.bgMusic = new Sound("assets/audio/background.mp3");
@@ -101,17 +101,19 @@ class Game {
             }
         }
 
-        /* if(this.player.collision(this.obstacle) || this.obstacle.collision(this.player)) {
-            if(this.player.position.y > this.obstacle.y + this.player.height){
-                this.player.velocity.y = 0;
+        if(this.player.collision(this.box) || this.box.collision(this.player)) {
+            if(this.player.position.y > this.box.y + this.player.height){
+                this.player.velocity.x = 0;
             }
-            /*
+            
             if(this.player.velocity.x > 0){
                 this.player.velocity.x = 0;
             }
+            this.player.update();
             //this.player.position.x = this.obstacle.position.x - this.player.width;
             console.log("PLAYER CONTRO IL MURO");
-        };*/
+        };
+
         this.player.update();
         this.newPlayer.update();
         this.fireball.update();
@@ -158,6 +160,7 @@ class Game {
         
         this.fireball.draw(this.ctx);
         this.ground.draw(this.ctx);
+        this.box.draw(this.ctx);
         
     }
 

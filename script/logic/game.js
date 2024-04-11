@@ -22,8 +22,7 @@ class Game {
         this.canvas.style.backgroundSize = "contain";
 
         this.newPlayer = new Player(this.config.PLAYER_SRC, this.playerNickname2);
-        this.newPlayer.setY(215);
-        this.newPlayer.setX(50);
+        
 
         this.ground = new Hitbox(0,40, this.canvas.width, 150);
         this.player = new Player(this.config.PLAYER_SRC, this.playerNickname);
@@ -34,19 +33,30 @@ class Game {
     keyboardPressedHandler(key) {
         switch(key) {
             case "d":
+                console.log("d");
                 this.player.velocity.x = this.config.WALK_SPEED;
                 break;
             case "a":
                 this.player.velocity.x = -this.config.WALK_SPEED;
                 break;
-            case " ":
-                this.player.jump(); 
-                break;
             case "w":
-                this.player.addSpeed(0, 3);
+                this.player.jump();
                 break;
             case "g":
                 this.player.shoot(this.ctx);
+                break;
+            case "arrowright":
+                console.log("ArrowRight");
+                this.newPlayer.velocity.x = this.config.WALK_SPEED;
+                break;
+            case "arrowleft":
+                this.newPlayer.velocity.x = -this.config.WALK_SPEED;
+                break;
+            case "arrowup":
+                this.newPlayer.jump();
+                break;
+            case "0":
+                this.newPlayer.shoot(this.ctx);
                 break;
         }
     }
@@ -59,6 +69,13 @@ class Game {
                 break;
             case "w":
                 this.player.setSpeed(0, 0);
+                break;
+            case "arrowright":
+            case "arrowleft":
+                this.newPlayer.velocity.x = 0;
+                break;
+            case "arrowup":
+                this.newPlayer.setSpeed(0, 0);
                 break;
         }
     }
@@ -96,6 +113,7 @@ class Game {
             console.log("PLAYER CONTRO IL MURO");
         };*/
         this.player.update();
+        this.newPlayer.update();
         this.fireball.update();
 
         for (let i = this.player.bullets.length - 1; i >= 0; i--) {
@@ -121,7 +139,7 @@ class Game {
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
-        if(this.newPlayer.health <= 0){
+        /*if(this.newPlayer.health <= 0){
             this.ctx.font = "30px Arial";
             this.ctx.fillStyle = "red";
             this.ctx.fillText("YOU WIN", 10, 50);
@@ -130,8 +148,10 @@ class Game {
         else{        
             this.newPlayer.draw(this.ctx);
             this.newPlayer.drawHealthBar(this.ctx);
-        }
+        }*/
 
+        this.newPlayer.draw(this.ctx);
+        this.newPlayer.drawHealthBar(this.ctx);
 
         this.player.draw(this.ctx);
         this.player.drawHealthBar(this.ctx);

@@ -63,9 +63,9 @@ class Player extends Hitbox {
         ctx.drawImage(this.images[this.currentImageIndex], this.position.x, 
             ctx.canvas.clientHeight - this.position.y, 
             175, 175);
-        ctx.font = "30px Verdana";
+        ctx.font = "30px Bungee Spice";
         ctx.fillStyle = "white";
-        ctx.fillText(this.name, this.position.x + 50, (ctx.canvas.clientHeight - (this.position.y + 5)));
+        ctx.fillText(this.name, this.position.x, (ctx.canvas.clientHeight - (this.position.y + 10)));
         this.bullets.forEach((b) => b.draw(ctx));
 
         super.draw(ctx);
